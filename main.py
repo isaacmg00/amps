@@ -9,7 +9,6 @@ s = soup.find_all('td', class_='wrap')
 
 arch_packages = []
 
-
 for x in soup.find_all('td', class_='wrap'):
     arch_packages.append(x.text[1:-1])
 
@@ -26,7 +25,6 @@ args2 = shlex.split(cmd2)
 
 proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 output = subprocess.check_output(args2, stdin=proc.stdout)
-#output = proc.stdout.read(args2, stdin=proc.stdout)
 proc.wait()
 
 output = output.decode().splitlines()
@@ -51,3 +49,10 @@ def intersection(lst1, lst2):
 
 
 print(intersection(arch_packages, output))
+vulnerable_packages = intersection(arch_packages, output)
+
+
+num_packages = len(output)
+print(str(num_packages) + " installed packages.")
+print("found " + str(len(vulnerable_packages)) +
+      " vulnerable packages on local system.")
