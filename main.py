@@ -1,6 +1,7 @@
 import requests
 import subprocess
 import shlex
+import distro
 from bs4 import BeautifulSoup
 
 r = requests.get('https://security.archlinux.org/')
