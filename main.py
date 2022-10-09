@@ -57,3 +57,4 @@ num_packages = len(output)
 print(str(num_packages) + " installed packages.")
 print("found " + str(len(vulnerable_packages)) +
       " vulnerable packages on local system.")
+print("Check for updates? y/n")
