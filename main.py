@@ -4,6 +4,11 @@ import shlex
 import distro
 from bs4 import BeautifulSoup
 
+
+def GET_SYSTEM_DISTRO():
+    return subprocess.call(['./get_distro.sh'])
+
+
 r = requests.get('https://security.archlinux.org/')
 soup = BeautifulSoup(r.content, 'html.parser')
 s = soup.find_all('td', class_='wrap')
@@ -58,3 +63,5 @@ print(str(num_packages) + " installed packages.")
 print("found " + str(len(vulnerable_packages)) +
       " vulnerable packages on local system.")
 print("Check for updates? y/n")
+
+GET_SYSTEM_DISTRO()

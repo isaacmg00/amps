@@ -1,6 +1,3 @@
 #!/bin/sh
-
 distribution_json=$(distro -j)
-echo $distribution_json
-out=$distribution_json | jq -r '.id'
-echo $out
+echo $distribution_json | python -c "import sys, json; print(json.load(sys.stdin)['id'])"
