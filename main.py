@@ -5,8 +5,15 @@ import distro
 from bs4 import BeautifulSoup
 
 
-def GET_SYSTEM_DISTRO():
-    return subprocess.call(['./get_distro.sh'])
+def get_system_distribution():
+    return subprocess.check_output(['./get_distro.sh'])
+
+
+system_distro = get_system_distribution()
+
+
+def get_package_manager(distro):
+    return distro.decode("utf-8")
 
 
 r = requests.get('https://security.archlinux.org/')
@@ -64,4 +71,5 @@ print("found " + str(len(vulnerable_packages)) +
       " vulnerable packages on local system.")
 print("Check for updates? y/n")
 
-GET_SYSTEM_DISTRO()
+
+print(get_package_manager(system_distro))
