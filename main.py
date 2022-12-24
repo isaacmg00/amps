@@ -35,6 +35,16 @@ s = soup.find_all('td', class_='wrap')
 
 arch_packages = []
 
+tables = soup.findChildren('table')
+my_table = tables[0]
+rows = my_table.findChildren(['th', 'tr'])
+
+for row in rows:
+    cells = row.findChildren('td')
+    for cell in cells:
+        value = cell.text
+        print(value)
+'''
 for x in soup.find_all('td', class_='wrap'):
     arch_packages.append(x.text)
     # arch_packages.append(x.text[1:-1])
@@ -44,9 +54,16 @@ text = []
 for i in soup.find_all('tr'):
     text.append(i.text)
 
+<<<<<<< HEAD
+print(text[11])
+
+string = text[11].split("\n")
+
+=======
 print(text[1])
 
 string = text[1].split("\n")
+>>>>>>> db2cd70ca60e5f3bab5a7170517621238fe2e3d0
 for item in string:
     if(item == ''):
         print("found nothing")
@@ -57,11 +74,19 @@ print(type(text[1]))
 
 
 '''
+<<<<<<< HEAD
+'''
+=======
+>>>>>>> db2cd70ca60e5f3bab5a7170517621238fe2e3d0
 for i in range(1, len(text)):
     group = i
     package = Package
     print(text[i])
 '''
+<<<<<<< HEAD
+'''
+=======
+>>>>>>> db2cd70ca60e5f3bab5a7170517621238fe2e3d0
 print(arch_packages)
 # Python 3.5+
 # cmd for arch based systems pacman -Q
@@ -100,4 +125,8 @@ print("found " + str(len(vulnerable_packages)) +
 print("Check for updates? y/n")
 
 print(get_package_manager(system_distro))
+<<<<<<< HEAD
+'''
+=======
 
+>>>>>>> db2cd70ca60e5f3bab5a7170517621238fe2e3d0
