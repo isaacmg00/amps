@@ -1,10 +1,10 @@
+#!/usr/bin/python3
 import requests
 import subprocess
 import shlex
 import distro
 from bs4 import BeautifulSoup
 from lxml import etree
-from tqdm import tqdm
 from rich.console import Console
 from rich.table import Table
 
@@ -31,12 +31,12 @@ def get_package_manager(distro):
 r = requests.get('https://security.archlinux.org/')
 soup = BeautifulSoup(r.content, 'html.parser')
 arch_packages = []
-vuln_packages = []
 
 index = 1
 list = []
 
-for x in tqdm(soup.find_all('td', class_='wrap'), desc="finding vulnerable packages", ascii=" ####", bar_format="{desc}: {percentage:.1f}%[{bar}]"):
+# for x in tqdm(soup.find_all('td', class_='wrap'), desc="finding vulnerable packages", ascii=" ####", bar_format="{desc}: {percentage:.1f}%[{bar}]"):
+for x in soup.find_all('td', class_='wrap'):
     list.append([x.text[1:-1], index])
     index += 1
     arch_packages.append(x.text[1: -1])
@@ -83,9 +83,9 @@ for vuln in vulnerable_packages:
     )
 
 num_packages = len(output)
-print(str(num_packages) + " packages installed via pacman.")
+print(str(num_packages) + " packages installed via pacman")
 print("found " + str(len(vulnerable_packages)) +
-      " vulnerable packages on local system.")
+      " vulnerable packages")
 print("distribution: " + get_package_manager(system_distro))
 
 console.print(table)
