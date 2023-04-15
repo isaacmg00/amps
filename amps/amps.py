@@ -10,24 +10,17 @@ from rich.console import Console
 from rich.table import Table
 
 console = Console()
-# load_dotenv()
 
-# install_directory = os.getenv('INSTALLATION_DIRECTORY')
 table = Table(show_header=True, header_style="bold")
 table.add_column("Package", justify="left")
 table.add_column("Severity", justify="left")
 table.add_column("Status", justify="left")
 table.add_column("Issue", justify="left")
 
-'''
-def get_system_distribution():
-    return subprocess.check_output([install_directory + '/get_distro.sh'])
-'''
-
 
 def get_system_distribution():
     try:
-        distribution = subprocess.check_output(["./get_disto.sh"])
+        distribution = subprocess.check_output(["./get_distro.sh"])
     except FileNotFoundError:
         distribution = distro.id()
 
@@ -40,8 +33,14 @@ def intersection(lst1, lst2):
     return lst3
 
 
-def mainfunction():
-    system_distro = get_system_distribution()
+def main():
+    system_distro = get_system_distribution().decode("utf-8").strip()
+    if (system_distro == "manjaro"):
+        PACMAN_AUDIT()
+
+
+def PACMAN_AUDIT():
+    system_distro = get_system_distribution().decode("utf-8").strip()
 
     r = requests.get('https://security.archlinux.org/')
     soup = BeautifulSoup(r.content, 'html.parser')
@@ -50,7 +49,6 @@ def mainfunction():
     index = 1
     list = []
 
-    # for x in tqdm(soup.find_all('td', class_='wrap'), desc="finding vulnerable packages", ascii=" ####", bar_format="{desc}: {percentage:.1f}%[{bar}]"):
     for x in soup.find_all('td', class_='wrap'):
         list.append([x.text[1:-1], index])
         index += 1
@@ -100,4 +98,4 @@ def mainfunction():
 
 if __name__ == "__main__":
     """This runs when you execute '$ python3 mypackage/mymodule.py'"""
-    mainfunction()
+    main()
