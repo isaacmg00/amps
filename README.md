@@ -17,7 +17,6 @@ pip install amps
 
 As a python script:
 ```shell
-git clone https://github.com/isaacmg00/amps && cd amps
-cd amps
+curl -O https://raw.githubusercontent.com/isaacmg00/amps/main/amps/amps.py
 python amps.py
 ```
