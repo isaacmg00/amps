@@ -14,3 +14,10 @@ Via PyPI:
 ```shell
 pip install amps
 ```
+
+As a python script:
+```shell
+git clone https://github.com/isaacmg00/amps && cd amps
+cd amps
+python amps.py
+```
