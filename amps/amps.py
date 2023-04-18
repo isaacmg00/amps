@@ -35,7 +35,7 @@ def intersection(lst1, lst2):
 
 def main():
     system_distro = get_system_distribution().decode("utf-8").strip()
-    if (system_distro == "manjaro"):
+    if (system_distro == "manjaro" or system_distro == "arch"):
         PACMAN_AUDIT()
 
 
